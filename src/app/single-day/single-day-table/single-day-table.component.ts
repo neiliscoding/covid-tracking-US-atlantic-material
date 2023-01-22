@@ -61,7 +61,7 @@ export interface SingleDayItem {
 export class SingleDayTableComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['title', 'total', 'change_from_prior_day', 'population_percent', 'seven_day_change_percent'];
-  items!: SingleDayItem[];
+  items: SingleDayItem[] = [];
   dataSource: MatTableDataSource<SingleDayItem>;
 
   // @Input() data: any = {};
@@ -70,7 +70,7 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   public get data(): any { return this._data; }
   public set data(data: any) {
     this._data = data;
-    this.populateItems(data);
+    if (data) this.populateItems(data);
   }
   private _data = '';
 
@@ -110,17 +110,17 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   populateItems(inData: any) {
 
     const cases = inData.data.cases;
-
     this.items.push(this.createItemFromSource(cases.total, 'cases'));
 
     this.dataSource = new MatTableDataSource(this.items);
+
   }
   createItemFromSource(total: any, title: string): SingleDayItem {
     return {
       title: title, total: total.value,
       change_from_prior_day: total.calculated.change_from_prior_day,
       population_percent: total.calculated.population_percent,
-      seven_day_change_percent: total.seven_day_change_percent
+      seven_day_change_percent: total.calculated.seven_day_change_percent
     }
   }
 
