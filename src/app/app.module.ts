@@ -1,6 +1,5 @@
 import { SingleDayComponent } from './single-day/single-day.component';
 import { SingleDayDatepickerComponent } from './single-day/single-day-datepicker/single-day-datepicker.component';
-// import { SingleDayModule } from './single-day/single-day.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,12 +15,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { SingleDayTableComponent } from './single-day/single-day-table/single-day-table.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,
     SingleDayComponent,
-    SingleDayDatepickerComponent
+    SingleDayDatepickerComponent,
+    SingleDayTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
     FormsModule
   ],
   providers: [],
