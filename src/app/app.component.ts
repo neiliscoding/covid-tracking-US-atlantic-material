@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'covid-tracking-US-atlantic-material';
+
+  openLinkInTab(url: string) {
+    window.open(url, "_blank");
+  }
 }

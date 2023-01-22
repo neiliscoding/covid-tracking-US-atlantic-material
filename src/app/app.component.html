@@ -15,13 +15,28 @@
   >
     <mat-icon>favorite</mat-icon>
   </button> -->
-  <button
+  <!-- <button
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with share icon"
   >
     <mat-icon>share</mat-icon>
+  </button> -->
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with link icon"
+    matTooltip="The COVID Tracking Project at The Atlantic"
+    (click)="openLinkInTab('https://covidtracking.com/')"
+  >
+    <mat-icon>link</mat-icon>
   </button>
 </mat-toolbar>
 <app-single-day class="flex flex-col p-4 gap-4"></app-single-day>
+<p class="p-4">
+  All data accredited to
+  <a href="https://covidtracking.com/license" target="_blank"
+    >The COVID Tracking Project at The Atlantic (CC BY 4.0)</a
+  >
+</p>
 <!-- <app-single-day-datepicker></app-single-day-datepicker> -->

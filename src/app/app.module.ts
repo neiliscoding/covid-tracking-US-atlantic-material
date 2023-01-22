@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { SingleDayTableComponent } from './single-day/single-day-table/single-day-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatNativeDateModule,
     MatInputModule,
     MatTableModule,
+    MatTooltipModule,
     MatPaginatorModule,
     FormsModule
   ],
