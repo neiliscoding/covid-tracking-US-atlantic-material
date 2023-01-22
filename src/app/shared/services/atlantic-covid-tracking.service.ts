@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -8,12 +9,17 @@ import { Observable, throwError } from 'rxjs';
 })
 export class AtlanticCovidTrackingService {
 
+  datePipe: DatePipe = new DatePipe("en-EN");
+
   constructor(private http: HttpClient) { }
 
   //  https://api.covidtracking.com/v2/us/daily/2021-01-02.json
 
-  getDailyByDate(): Observable<any> {
-    const result = this.http.get('https://api.covidtracking.com/v2/us/daily/2021-01-02.json');
+  getDailyByDate(date: Date | null): Observable<any> {
+    let newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
+    console.log(newDate);
+
+    const result = this.http.get('https://api.covidtracking.com/v2/us/daily/' + newDate + '.json');
     console.log(result);
     return result;
   }
