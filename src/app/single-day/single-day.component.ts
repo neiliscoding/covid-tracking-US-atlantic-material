@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CovidData } from '../shared/interfaces/CovidData';
 import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-tracking.service';
 
 @Component({
@@ -7,19 +9,31 @@ import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-
   styleUrls: ['./single-day.component.css']
 })
 export class SingleDayComponent implements OnInit {
-  trackingService: AtlanticCovidTrackingService;
-  data$: any;
+  data$!: Observable<CovidData>;
   selectedDate!: Date | null;
 
-  constructor(trackingService: AtlanticCovidTrackingService) {
+  constructor(private trackingService: AtlanticCovidTrackingService) {
     this.trackingService = trackingService;
   }
 
   ngOnInit() {
+
+    // this.data$?.subscribe((data: any) => {
+    //   console.log(data);
+    // });
   }
 
+  // ngAfterViewInit() {
+  //   this.data$?.subscribe((data: any) => {
+  //     console.log(data);
+  //   });
+  // }
+
   showDailyByDate() {
-    this.data$ = this.trackingService.getDailyByDate(this.selectedDate).pipe();
+    this.data$ = this.trackingService.getDailyByDate(this.selectedDate);
+    this.data$?.subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   showDailyByDateOld() {
@@ -30,10 +44,10 @@ export class SingleDayComponent implements OnInit {
   }
 
   onDateChange(e: Date) {
-    console.log(e);
 
     this.selectedDate = e;
     this.showDailyByDate();
+    // this.showDailyByDateOld();
 
   }
 
