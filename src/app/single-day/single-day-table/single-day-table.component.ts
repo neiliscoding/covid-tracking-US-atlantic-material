@@ -22,8 +22,6 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   items: SingleDayItem[] = [];
   dataSource: MatTableDataSource<SingleDayItem>;
 
-  // @Input() data: any = {};
-
   @Input()
   public get data(): any { return this._data; }
   public set data(data: any) {

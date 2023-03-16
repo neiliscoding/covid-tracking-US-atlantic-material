@@ -8,7 +8,7 @@ import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-
 })
 export class SingleDayComponent implements OnInit {
   trackingService: AtlanticCovidTrackingService;
-  data: any;
+  data$: any;
   selectedDate!: Date | null;
 
   constructor(trackingService: AtlanticCovidTrackingService) {
@@ -19,8 +19,12 @@ export class SingleDayComponent implements OnInit {
   }
 
   showDailyByDate() {
+    this.data$ = this.trackingService.getDailyByDate(this.selectedDate).pipe();
+  }
+
+  showDailyByDateOld() {
     this.trackingService.getDailyByDate(this.selectedDate).subscribe((data: any) => {
-      this.data = data;
+      this.data$ = data;
       console.log(data);
     });
   }

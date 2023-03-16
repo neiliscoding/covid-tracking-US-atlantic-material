@@ -19,6 +19,13 @@ export class AtlanticCovidTrackingService {
     let newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
     console.log(newDate);
 
+    return this.http.get('https://api.covidtracking.com/v2/us/daily/' + newDate + '.json').pipe();
+  }
+
+  getDailyByDateOld(date: Date | null): Observable<any> {
+    let newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
+    console.log(newDate);
+
     const result = this.http.get('https://api.covidtracking.com/v2/us/daily/' + newDate + '.json');
     console.log(result);
     return result;
