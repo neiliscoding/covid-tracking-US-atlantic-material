@@ -42,7 +42,9 @@ export class AtlanticCovidTrackingService {
   }
 
   private mapResponseToCovidData(response: any): CovidData {
-    const data = response.data[0];
+    const data = response.data;
+    console.log('data', data);
+
     const covidData: CovidData = {
       meta: {
         build_time: response.meta.build_time,
