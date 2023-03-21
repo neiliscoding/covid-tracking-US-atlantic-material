@@ -10,7 +10,6 @@ export class SingleDayDatepickerComponent implements OnInit {
 
   endDate: Date = new Date("2021-03-07");
 
-
   @Output() dateChange = new EventEmitter<Date>();
 
   constructor() { }
@@ -22,7 +21,6 @@ export class SingleDayDatepickerComponent implements OnInit {
     console.log(e.value);
 
     if (e.value) this.dateChange.emit(e.value);
-    // this.selectedDate = e.value;
   }
 
 }
