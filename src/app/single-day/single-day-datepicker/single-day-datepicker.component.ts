@@ -18,7 +18,7 @@ export class SingleDayDatepickerComponent implements OnInit {
   }
 
   onDateChange(e: MatDatepickerInputEvent<Date>) {
-    console.log(e.value);
+    console.log('onDateChange', e.value);
 
     if (e.value) this.dateChange.emit(e.value);
   }

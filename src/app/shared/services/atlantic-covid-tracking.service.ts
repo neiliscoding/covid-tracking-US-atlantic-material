@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { CovidData } from '../interfaces/CovidData';
 
 @Injectable({
@@ -20,11 +20,15 @@ export class AtlanticCovidTrackingService {
     return this.http.get<CovidData>(url).pipe(
       map((response: any) => this.mapResponseToCovidData(response))
     );
+    // return this.http.get<CovidData>(url).pipe(
+    //   take(1), // Add take(1) operator here
+    //   map((response: any) => this.mapResponseToCovidData(response))
+    // );  
   }
 
   private mapResponseToCovidData(response: any): CovidData {
     const data = response.data;
-    console.log('data', data);
+    console.log('mapResponseToCovidData data', data);
 
     const covidData: CovidData = {
       meta: {

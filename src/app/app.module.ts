@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { SingleDayTableComponent } from './single-day/single-day-table/single-day-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SingleDayChartComponent } from './single-day/single-day-chart/single-day-chart.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SingleDayComponent,
     SingleDayDatepickerComponent,
     SingleDayTableComponent,
+    SingleDayChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatTooltipModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,9 +18,9 @@ export class SingleDayComponent {
 
   showDailyByDate() {
     this.data$ = this.trackingService.getDailyByDate(this.selectedDate);
-    this.data$?.subscribe((data: any) => {
-      console.log(data);
-    });
+    // this.data$?.subscribe((data: any) => {
+    //   console.log('showDailyByDate' + data);
+    // });
   }
 
   onDateChange(e: Date) {

@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, Input, ViewChild, OnInit } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
-export interface SingleDayItem {
+
+export interface ChartItem {
   title: string;
   total: number;
   change_from_prior_day: number;
@@ -12,16 +12,17 @@ export interface SingleDayItem {
 }
 
 @Component({
-  selector: 'app-single-day-table',
-  templateUrl: './single-day-table.component.html',
-  styleUrls: ['./single-day-table.component.css']
+  selector: 'app-single-day-chart',
+  templateUrl: './single-day-chart.component.html',
+  styleUrls: ['./single-day-chart.component.scss']
 })
-export class SingleDayTableComponent implements OnInit, AfterViewInit {
+export class SingleDayChartComponent {
 
-  displayedColumns: string[] = ['title', 'total', 'change_from_prior_day', 'population_percent', 'seven_day_change_percent'];
-  items: SingleDayItem[] = [];
-  dataSource: MatTableDataSource<SingleDayItem>;
+  
 
+  items: ChartItem[] = [];
+  dataSource: MatTableDataSource<ChartItem>;
+  
   @Input()
   public get data(): any { return this._data; }
   public set data(data: any) {
@@ -30,34 +31,11 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   }
   private _data = '';
 
-  // @ViewChild(MatPaginator)
-  // paginator!: MatPaginator;
-
-  @ViewChild(MatSort)
-  sort!: MatSort;
-
   constructor() {
 
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.items);
-  }
-  ngOnInit(): void {
-    // throw new Error('Method not implemented.');
-  }
-
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
   }
 
   populateItems(inData: any) {
@@ -75,7 +53,7 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
     console.log('populateItems', this.items);
 
   }
-  createItemFromSource(total: any, title: string): SingleDayItem {
+  createItemFromSource(total: any, title: string): ChartItem {
     return {
       title: title, 
       total: total.value,
@@ -84,4 +62,5 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
       seven_day_change_percent: total.calculated.seven_day_change_percent
     }
   }
+
 }
