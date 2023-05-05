@@ -1,14 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
+
 
 
 export interface ChartItem {
-  title: string;
-  total: number;
-  change_from_prior_day: number;
-  population_percent: number;
-  // seven_day_average: number;
-  seven_day_change_percent: number;
+  name: string;
+  value: number;
 }
 
 @Component({
@@ -18,10 +15,33 @@ export interface ChartItem {
 })
 export class SingleDayChartComponent {
 
-  
+//chart variables
+
+// single: any[];
+// multi: any[];
+view: [number, number] = [700, 400];
+// options
+showXAxis = true;
+showYAxis = true;
+gradient = false;
+showLegend = false;
+showXAxisLabel = true;
+xAxisLabel = 'Country';
+showYAxisLabel = true;
+yAxisLabel = 'Population';
+// colorScheme = {
+//   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+// };
+
+colorScheme: Color = {
+  name: 'myScheme',
+  selectable: true,
+  group:  ScaleType.Ordinal,
+  domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+};
 
   items: ChartItem[] = [];
-  dataSource: MatTableDataSource<ChartItem>;
+  // dataSource: MatTableDataSource<ChartItem>;
   
   @Input()
   public get data(): any { return this._data; }
@@ -33,9 +53,8 @@ export class SingleDayChartComponent {
 
   constructor() {
 
-
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.items);
+    // this.dataSource = new MatTableDataSource(this.items);
   }
 
   populateItems(inData: any) {
@@ -44,23 +63,28 @@ export class SingleDayChartComponent {
     this.items.push(this.createItemFromSource(inData.data.cases.total, 'cases'));
     this.items.push(this.createItemFromSource(inData.data.outcomes.death.total, 'death'));
     this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.currently, 'hospitalized'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in_icu'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on_ventilator'));
+    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in ICU'));
+    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on ventilator'));
     this.items.push(this.createItemFromSource(inData.data.testing.total, 'testing'));
 
-    this.dataSource = new MatTableDataSource(this.items);
+    // this.dataSource = new MatTableDataSource(this.items);
 
-    console.log('populateItems', this.items);
+    console.log('chart result ', this.items);
+
+    // Object.assign(this, this.items );
+
 
   }
-  createItemFromSource(total: any, title: string): ChartItem {
+
+  createItemFromSource(total: any, name: string): ChartItem {
     return {
-      title: title, 
-      total: total.value,
-      change_from_prior_day: total.calculated.change_from_prior_day,
-      population_percent: total.calculated.population_percent,
-      seven_day_change_percent: total.calculated.seven_day_change_percent
+      name: name, 
+      value: total.value
     }
+  }
+
+  onSelect(event: any) {
+    console.log(event);
   }
 
 }
