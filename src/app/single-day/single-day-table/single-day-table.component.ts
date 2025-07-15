@@ -12,9 +12,10 @@ export interface SingleDayItem {
 }
 
 @Component({
-  selector: 'app-single-day-table',
-  templateUrl: './single-day-table.component.html',
-  styleUrls: ['./single-day-table.component.css']
+    selector: 'app-single-day-table',
+    templateUrl: './single-day-table.component.html',
+    styleUrls: ['./single-day-table.component.css'],
+    standalone: false
 })
 export class SingleDayTableComponent implements OnInit, AfterViewInit {
 

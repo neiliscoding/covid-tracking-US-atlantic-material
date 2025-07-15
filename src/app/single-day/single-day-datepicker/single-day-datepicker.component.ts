@@ -2,9 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
-  selector: 'app-single-day-datepicker',
-  templateUrl: './single-day-datepicker.component.html',
-  styleUrls: ['./single-day-datepicker.component.css']
+    selector: 'app-single-day-datepicker',
+    templateUrl: './single-day-datepicker.component.html',
+    styleUrls: ['./single-day-datepicker.component.css'],
+    standalone: false
 })
 export class SingleDayDatepickerComponent implements OnInit {
 

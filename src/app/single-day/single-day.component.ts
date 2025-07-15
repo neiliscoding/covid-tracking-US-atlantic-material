@@ -4,9 +4,10 @@ import { CovidData } from '../shared/interfaces/CovidData';
 import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-tracking.service';
 
 @Component({
-  selector: 'app-single-day',
-  templateUrl: './single-day.component.html',
-  styleUrls: ['./single-day.component.css']
+    selector: 'app-single-day',
+    templateUrl: './single-day.component.html',
+    styleUrls: ['./single-day.component.css'],
+    standalone: false
 })
 export class SingleDayComponent {
   data$!: Observable<CovidData>;

@@ -9,9 +9,10 @@ export interface ChartItem {
 }
 
 @Component({
-  selector: 'app-single-day-chart',
-  templateUrl: './single-day-chart.component.html',
-  styleUrls: ['./single-day-chart.component.scss']
+    selector: 'app-single-day-chart',
+    templateUrl: './single-day-chart.component.html',
+    styleUrls: ['./single-day-chart.component.scss'],
+    standalone: false
 })
 export class SingleDayChartComponent {
 
