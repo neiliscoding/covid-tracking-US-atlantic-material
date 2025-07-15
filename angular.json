@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "covid-tracking-US-atlantic-material:build:production"
+              "buildTarget": "covid-tracking-US-atlantic-material:build:production"
             },
             "development": {
-              "browserTarget": "covid-tracking-US-atlantic-material:build:development"
+              "buildTarget": "covid-tracking-US-atlantic-material:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "covid-tracking-US-atlantic-material:build"
+            "buildTarget": "covid-tracking-US-atlantic-material:build"
           }
         },
         "test": {
