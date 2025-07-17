@@ -1,6 +1,10 @@
 # CovidTrackingUSAtlanticMaterial
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+An Angular front end for https://covidtracking.com/ API, using Angular Material and ngx-charts.
+
+# Angular Verion
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4. and updated to version 20.1.0 with Angular 20.1.2
 
 ## Development server
 
