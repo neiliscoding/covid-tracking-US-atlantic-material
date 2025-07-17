@@ -20,10 +20,6 @@ export class AtlanticCovidTrackingService {
     return this.http.get<CovidData>(url).pipe(
       map((response: any) => this.mapResponseToCovidData(response))
     );
-    // return this.http.get<CovidData>(url).pipe(
-    //   take(1), // Add take(1) operator here
-    //   map((response: any) => this.mapResponseToCovidData(response))
-    // );  
   }
 
   private mapResponseToCovidData(response: any): CovidData {
