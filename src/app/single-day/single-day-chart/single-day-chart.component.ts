@@ -7,10 +7,10 @@ export interface ChartItem {
 }
 
 @Component({
-    selector: 'app-single-day-chart',
-    templateUrl: './single-day-chart.component.html',
-    styleUrls: ['./single-day-chart.component.scss'],
-    imports: [BarChartModule]
+  selector: 'app-single-day-chart',
+  templateUrl: './single-day-chart.component.html',
+  styleUrls: ['./single-day-chart.component.scss'],
+  imports: [BarChartModule]
 })
 export class SingleDayChartComponent {
 
@@ -68,20 +68,23 @@ export class SingleDayChartComponent {
 
   populateItems(inData: any) {
 
-    this.items = [];
-    // this.items.push(this.createItemFromSource(inData.data.cases.total, 'cases'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.death.total, 'death'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.currently, 'hospitalized'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in ICU'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on ventilator'));
-    // this.items.push(this.createItemFromSource(inData.data.testing.total, 'testing'));
+    if (inData && inData.data) {
 
-    // this.dataSource = new MatTableDataSource(this.items);
 
-    console.log('chart result ', this.items);
+      this.items = [];
+      // this.items.push(this.createItemFromSource(inData.data.cases.total, 'cases'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.death.total, 'death'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.currently, 'hospitalized'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in ICU'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on ventilator'));
+      // this.items.push(this.createItemFromSource(inData.data.testing.total, 'testing'));
 
-    // Object.assign(this, this.items );
+      // this.dataSource = new MatTableDataSource(this.items);
 
+      console.log('chart result ', this.items);
+
+      // Object.assign(this, this.items );
+    }
 
   }
 

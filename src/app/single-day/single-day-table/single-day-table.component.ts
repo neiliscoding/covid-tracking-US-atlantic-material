@@ -27,7 +27,6 @@ export class SingleDayTableComponent implements AfterViewInit {
 
   data = input<any>();
 
-
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;
 
@@ -61,17 +60,24 @@ export class SingleDayTableComponent implements AfterViewInit {
 
   populateItems(inData: any) {
 
-    this.items = [];
-    this.items.push(this.createItemFromSource(inData.data.cases.total, 'cases'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.death.total, 'death'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.currently, 'hospitalized'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in_icu'));
-    this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on_ventilator'));
-    this.items.push(this.createItemFromSource(inData.data.testing.total, 'testing'));
+    console.log('populateItems inData', inData);
 
-    this.dataSource = new MatTableDataSource(this.items);
+    if (inData && inData.data) {
 
-    console.log('populateItems', this.items);
+
+      this.items = [];
+      this.items.push(this.createItemFromSource(inData.data.cases.total, 'cases'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.death.total, 'death'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.currently, 'hospitalized'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.in_icu.currently, 'in_icu'));
+      this.items.push(this.createItemFromSource(inData.data.outcomes.hospitalized.on_ventilator.currently, 'on_ventilator'));
+      this.items.push(this.createItemFromSource(inData.data.testing.total, 'testing'));
+
+      this.dataSource = new MatTableDataSource(this.items);
+
+      console.log('populateItems', this.items);
+
+    }
 
   }
   createItemFromSource(total: any, title: string): SingleDayItem {

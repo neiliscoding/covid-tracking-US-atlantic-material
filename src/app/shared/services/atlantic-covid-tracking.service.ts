@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, runInInjectionContext, Signal, EnvironmentInjector } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CovidData } from '../interfaces/CovidData';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
@@ -24,37 +23,19 @@ export class AtlanticCovidTrackingService {
     );
   }
 
-  getDailyByDateSignal(date: Date | null, injector: EnvironmentInjector): Signal<CovidData> {
-    return runInInjectionContext(injector, () => {
-      const datePipe = inject(DatePipe);
-      const http = inject(HttpClient);
 
-      const newDate = datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
-      const url = `${this.#baseUrl}daily/${newDate}.json`;
+// getDailyByDateSignal(date: Date | null): Signal<CovidData> {
+//   const newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
+//   const url = `${this.#baseUrl}daily/${newDate}.json`;
 
-      return toSignal(
-        http.get<CovidData>(url).pipe(
-          map((response: any) => this.mapResponseToCovidData(response))
-        ),
-        { initialValue: {} as CovidData }
-      );
-    });
-  }
+//   return toSignal(
+//     this.#http.get<CovidData>(url).pipe(
+//       map((response: any) => this.mapResponseToCovidData(response))
+//     ),
+//     { initialValue: {} as CovidData }
+//   );
+// }
 
-
-  // getDailyByDateSignal(date: Date | null): Signal<CovidData> {
-  //   const newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
-  //   const url = `${this.#baseUrl}daily/${newDate}.json`;
-
-  //   const mappedData = toSignal(
-  //     this.#http.get<CovidData>(url).pipe(
-  //       map((response: any) => this.mapResponseToCovidData(response))
-  //     ),
-  //     { initialValue: {} as CovidData } // Provide initial value for the signal
-  //   );
-
-  //   return mappedData;
-  // }
 
   private mapResponseToCovidData(response: any): CovidData {
     const data = response.data;
