@@ -22,13 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SingleDayChartComponent } from './single-day/single-day-chart/single-day-chart.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        SingleDayComponent,
-        SingleDayDatepickerComponent,
-        SingleDayTableComponent,
-        SingleDayChartComponent,
-    ],
+@NgModule({ declarations: [AppComponent],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -44,5 +38,8 @@ import { SingleDayChartComponent } from './single-day/single-day-chart/single-da
         MatTooltipModule,
         MatPaginatorModule,
         FormsModule,
-        NgxChartsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        NgxChartsModule, SingleDayComponent,
+        SingleDayDatepickerComponent,
+        SingleDayTableComponent,
+        SingleDayChartComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

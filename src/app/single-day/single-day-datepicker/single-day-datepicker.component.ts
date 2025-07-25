@@ -1,11 +1,13 @@
 import { Component, output } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatDatepickerInputEvent, MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatFormField, MatLabel, MatHint, MatSuffix } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     selector: 'app-single-day-datepicker',
     templateUrl: './single-day-datepicker.component.html',
     styleUrls: ['./single-day-datepicker.component.css'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatInput, MatDatepickerInput, MatHint, MatDatepickerToggle, MatSuffix, MatDatepicker]
 })
 export class SingleDayDatepickerComponent {
 

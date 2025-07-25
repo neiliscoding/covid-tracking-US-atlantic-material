@@ -1,5 +1,6 @@
 import { Component, effect, ElementRef, input, Renderer2, ViewChild } from '@angular/core';
-import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { Color, ScaleType, BarChartModule } from '@swimlane/ngx-charts';
+import { NgIf } from '@angular/common';
 
 export interface ChartItem {
   name: string;
@@ -7,10 +8,10 @@ export interface ChartItem {
 }
 
 @Component({
-  selector: 'app-single-day-chart',
-  templateUrl: './single-day-chart.component.html',
-  styleUrls: ['./single-day-chart.component.scss'],
-  standalone: false
+    selector: 'app-single-day-chart',
+    templateUrl: './single-day-chart.component.html',
+    styleUrls: ['./single-day-chart.component.scss'],
+    imports: [NgIf, BarChartModule]
 })
 export class SingleDayChartComponent {
 

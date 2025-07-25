@@ -8,8 +8,8 @@ describe('SingleDayChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleDayChartComponent ]
-    })
+    imports: [SingleDayChartComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(SingleDayChartComponent);

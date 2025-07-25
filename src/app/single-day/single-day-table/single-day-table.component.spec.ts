@@ -11,8 +11,8 @@ describe('SingleDayTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleDayTableComponent ]
-    })
+    imports: [SingleDayTableComponent]
+})
     .compileComponents();
   }));
 

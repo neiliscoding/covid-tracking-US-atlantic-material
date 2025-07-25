@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, Input, ViewChild, OnInit, input, effect, inject, EnvironmentInjector } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow } from '@angular/material/table';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 export interface SingleDayItem {
   title: string;
@@ -15,7 +17,7 @@ export interface SingleDayItem {
     selector: 'app-single-day-table',
     templateUrl: './single-day-table.component.html',
     styleUrls: ['./single-day-table.component.css'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatInput, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow]
 })
 export class SingleDayTableComponent implements AfterViewInit {
 

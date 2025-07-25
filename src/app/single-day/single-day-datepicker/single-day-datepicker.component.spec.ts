@@ -11,8 +11,8 @@ describe('SingleDayDatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SingleDayDatepickerComponent ]
-    })
+    imports: [SingleDayDatepickerComponent]
+})
     .compileComponents();
   }));
 
