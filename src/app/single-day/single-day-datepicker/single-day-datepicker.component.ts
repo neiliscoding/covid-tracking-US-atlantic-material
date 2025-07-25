@@ -1,4 +1,4 @@
-import { Component, OnInit, output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
@@ -7,16 +7,11 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
     styleUrls: ['./single-day-datepicker.component.css'],
     standalone: false
 })
-export class SingleDayDatepickerComponent implements OnInit {
+export class SingleDayDatepickerComponent {
 
   endDate: Date = new Date("2021-03-07");
 
   dateChange = output<Date>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   onDateChange(e: MatDatepickerInputEvent<Date>) {
     console.log('onDateChange', e.value);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CovidData } from '../shared/interfaces/CovidData';
 import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-tracking.service';
@@ -12,16 +12,13 @@ import { AtlanticCovidTrackingService } from '../shared/services/atlantic-covid-
 export class SingleDayComponent {
   data$!: Observable<CovidData>;
   selectedDate!: Date | null;
+  #trackingService = inject(AtlanticCovidTrackingService);
+  dailySignal: any;
 
-  constructor(private trackingService: AtlanticCovidTrackingService) {
-    this.trackingService = trackingService;
-  }
 
   showDailyByDate() {
-    this.data$ = this.trackingService.getDailyByDate(this.selectedDate);
-    // this.data$?.subscribe((data: any) => {
-    //   console.log('showDailyByDate' + data);
-    // });
+    this.data$ = this.#trackingService.getDailyByDateObservable(this.selectedDate);
+    // this.dailySignal = this.#trackingService.getDailyByDateSignal(this.selectedDate);
   }
 
   onDateChange(e: Date) {

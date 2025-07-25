@@ -1,8 +1,6 @@
 import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 
-
-
 export interface ChartItem {
   name: string;
   value: number;
