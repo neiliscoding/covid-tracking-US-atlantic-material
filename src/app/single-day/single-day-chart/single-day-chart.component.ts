@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, Input, Renderer2, ViewChild } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 export interface ChartItem {
@@ -7,54 +7,56 @@ export interface ChartItem {
 }
 
 @Component({
-    selector: 'app-single-day-chart',
-    templateUrl: './single-day-chart.component.html',
-    styleUrls: ['./single-day-chart.component.scss'],
-    standalone: false
+  selector: 'app-single-day-chart',
+  templateUrl: './single-day-chart.component.html',
+  styleUrls: ['./single-day-chart.component.scss'],
+  standalone: false
 })
 export class SingleDayChartComponent {
 
-//chart variables
+  //chart variables
 
-// single: any[];
-// multi: any[];
-view: [number, number] = [700, 400];
-// options
-showXAxis = true;
-showYAxis = true;
-gradient = false;
-showLegend = false;
-showXAxisLabel = true;
-xAxisLabel = 'Category';
-showYAxisLabel = true;
-yAxisLabel = 'Population';
-// colorScheme = {
-//   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-// };
+  // single: any[];
+  // multi: any[];
+  view: [number, number] = [700, 400];
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = 'Category';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+  // colorScheme = {
+  //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  // };
 
-colorScheme: Color = {
-  name: 'myScheme',
-  selectable: true,
-  group:  ScaleType.Ordinal,
-  domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-};
+  colorScheme: Color = {
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   items: ChartItem[] = [];
   // dataSource: MatTableDataSource<ChartItem>;
-  
-  @Input()
-  public get data(): any { return this._data; }
-  public set data(data: any) {
-    this._data = data;
-    if (data) this.populateItems(data);
-  }
-  private _data = '';
+
+  data = input<any>();
 
   @ViewChild('myElement')
   myElement!: ElementRef;
 
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+
+    effect(() => {
+      const d = this.data();
+      if (d) {
+        this.populateItems(d);
+      }
+    });
+  }
 
 
   ngAfterViewInit() {
@@ -62,7 +64,7 @@ colorScheme: Color = {
     console.log('Width:', width);
     this.updateViewWidth(width);
   }
-  
+
 
   populateItems(inData: any) {
 
@@ -85,7 +87,7 @@ colorScheme: Color = {
 
   createItemFromSource(total: any, name: string): ChartItem {
     return {
-      name: name, 
+      name: name,
       value: total.value
     }
   }

@@ -18,7 +18,7 @@ export class SingleDayComponent {
 
   showDailyByDate() {
     this.data$ = this.#trackingService.getDailyByDateObservable(this.selectedDate);
-    // this.dailySignal = this.#trackingService.getDailyByDateSignal(this.selectedDate);
+    this.dailySignal = this.#trackingService.getDailyByDateSignal(this.selectedDate);
   }
 
   onDateChange(e: Date) {

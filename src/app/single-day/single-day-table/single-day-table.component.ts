@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild, OnInit, input, effect } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -23,13 +23,7 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   items: SingleDayItem[] = [];
   dataSource: MatTableDataSource<SingleDayItem>;
 
-  @Input()
-  public get data(): any { return this._data; }
-  public set data(data: any) {
-    this._data = data;
-    if (data) this.populateItems(data);
-  }
-  private _data = '';
+  data = input<any>();
 
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;
@@ -38,10 +32,14 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
   sort!: MatSort;
 
   constructor() {
-
-
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.items);
+
+    effect(() => {
+      const d = this.data();
+      if (d) {
+        this.populateItems(d);
+      }
+    });
   }
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
