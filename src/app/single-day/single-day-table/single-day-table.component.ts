@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild, OnInit, input, effect } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild, OnInit, input, effect, inject, EnvironmentInjector } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -17,13 +17,14 @@ export interface SingleDayItem {
     styleUrls: ['./single-day-table.component.css'],
     standalone: false
 })
-export class SingleDayTableComponent implements OnInit, AfterViewInit {
+export class SingleDayTableComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['title', 'total', 'change_from_prior_day', 'population_percent', 'seven_day_change_percent'];
   items: SingleDayItem[] = [];
   dataSource: MatTableDataSource<SingleDayItem>;
 
   data = input<any>();
+
 
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator;
@@ -40,9 +41,6 @@ export class SingleDayTableComponent implements OnInit, AfterViewInit {
         this.populateItems(d);
       }
     });
-  }
-  ngOnInit(): void {
-    // throw new Error('Method not implemented.');
   }
 
   ngAfterViewInit() {

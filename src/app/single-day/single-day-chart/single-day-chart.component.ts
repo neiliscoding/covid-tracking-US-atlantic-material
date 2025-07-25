@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, input, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, input, Renderer2, ViewChild } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 export interface ChartItem {
@@ -48,7 +48,7 @@ export class SingleDayChartComponent {
   myElement!: ElementRef;
 
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  constructor(private renderer: Renderer2) {
 
     effect(() => {
       const d = this.data();
