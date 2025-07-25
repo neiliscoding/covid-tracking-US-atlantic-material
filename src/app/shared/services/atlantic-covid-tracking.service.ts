@@ -1,8 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, runInInjectionContext, Signal, EnvironmentInjector } from '@angular/core';
+import { inject, Injectable, runInInjectionContext, Signal, EnvironmentInjector, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { CovidData } from '../interfaces/CovidData';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,6 @@ export class AtlanticCovidTrackingService {
   datePipe: DatePipe = new DatePipe("en-EN");
   #baseUrl = `https://api.covidtracking.com/v2/us/`;
 
-  // Legacy method for my own reference when upgrading other Angular code bases
   getDailyByDateObservable(date: Date | null): Observable<CovidData> {
     const newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
     const url = `${this.#baseUrl}daily/${newDate}.json`;
@@ -24,18 +24,22 @@ export class AtlanticCovidTrackingService {
   }
 
 
-// getDailyByDateSignal(date: Date | null): Signal<CovidData> {
-//   const newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
-//   const url = `${this.#baseUrl}daily/${newDate}.json`;
+  // toSignal errors outside of the constructor, so we could to use runInInjectionContext
+  // but this seems like overkill
+  // experimental
+  getDailyByDateSignal(date: Date | null) {
+    if (!date) return signal({} as CovidData);
 
-//   return toSignal(
-//     this.#http.get<CovidData>(url).pipe(
-//       map((response: any) => this.mapResponseToCovidData(response))
-//     ),
-//     { initialValue: {} as CovidData }
-//   );
-// }
+    const newDate = this.datePipe.transform(date, 'yyyy-MM-dd', 'es-ES');
+    const url = `${this.#baseUrl}daily/${newDate}.json`;
 
+    return toSignal(
+      this.#http.get<any>(url).pipe(
+        map(response => this.mapResponseToCovidData(response))
+      ),
+      { initialValue: {} as CovidData }
+  );
+  }
 
   private mapResponseToCovidData(response: any): CovidData {
     const data = response.data;
